@@ -1,18 +1,20 @@
 class CountriesController < ApplicationController
-  before_action :set_country, only: [show, destroy, update, edit, create]
-  
+  before_action :set_country, only: [:show, :destroy, :update, :edit]
+
   def index
     @countries = Country.all
   end
 
   def new
     @country = Country.new
+    @user = current_user
   end
 
   def create
-    @country = Country.new(params[:id])
+    @country = Country.new(country_params)
+    @country.user = current_user
     if @country.save
-      redirect_to country_path(@country)
+      redirect_to countries_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,7 +42,7 @@ class CountriesController < ApplicationController
   private
 
   def country_params
-    params.require(:country).permit(:name, :price, :tag_line, :description, :user_id, :main_language)
+    params.require(:country).permit(:name, :price, :tag_line, :description, :main_language, :user_id)
   end
 
   def set_country
