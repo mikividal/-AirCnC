@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :countries do
     resources :bookings, only: %i[create]
   end
-  resources :bookings, only: %i[index destroy] do
+  resources :bookings, only: %i[index destroy show] do
     resources :reviews, only: %i[create]
   end
   resources :reviews, only: [:destroy]

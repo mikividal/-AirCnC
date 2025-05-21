@@ -1,4 +1,6 @@
-<%= simple_form_for (country) do |f| %>
+<div class="container">
+
+  <%= simple_form_for (country) do |f| %>
   <%= f.input :name %>
   <%= f.input :price %>
   <%= f.input :tag_line %>
@@ -6,3 +8,8 @@
   <%= f.input :main_language %>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
+<%= link_to "Cancel", countries_path, class:"btn btn-danger"%>
+
+</div>
+
+  </div>
