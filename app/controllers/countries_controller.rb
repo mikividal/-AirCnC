@@ -1,5 +1,4 @@
 class CountriesController < ApplicationController
-
   before_action :set_country, only: [:show, :destroy, :update, :edit]
 
   def index
@@ -22,6 +21,8 @@ class CountriesController < ApplicationController
   end
 
   def show
+    @booking = Booking.new
+    @user = current_user
   end
 
   def destroy

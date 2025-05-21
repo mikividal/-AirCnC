@@ -8,7 +8,7 @@
     <p> Main language: <%= @country.main_language %> </p>
 
     <div class="mt-4">
-    <%= simple_form_for(Booking.new, url: "#") do |f| %>
+    <%= simple_form_for [@country, @booking] do |f| %>
       <%= f.input :date,
                 as: :string,
                 input_html: { data: { controller: "datepicker" } } %>
