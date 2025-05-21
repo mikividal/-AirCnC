@@ -7,3 +7,5 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
 end
 
 
+
+
