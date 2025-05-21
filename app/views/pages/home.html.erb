@@ -1,3 +1,25 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container py-5">
+  <div class="row align-items-center">
+    <!-- Text + Signup -->
+    <div class="col-md-6 mb-4 mb-md-0">
+      <h1 class="display-4 fw-bold">Welcome to AirCnC</h1>
+      <p class="lead text-muted">Rent countries like never before. A global booking experience with a local touch.</p>
 
+      <% if user_signed_in? %>
+        <p class="text-success">Welcome back, <%= current_user.email %>!</p>
+      <% else %>
+        <div class="card shadow-sm p-4 mt-3">
+          <h5 class="mb-3">Sign up now to explore!</h5>
+          <%= render "devise/registrations/new" %>
+        </div>
+      <% end %>
+
+      <%= link_to "Browse all countries", countries_path, class: "btn btn-outline-primary mt-4" %>
+    </div>
+
+    <!-- Image -->
+    <div class="col-md-6 text-center">
+      <%= image_tag("landing.jpg", class: "img-fluid rounded shadow", alt: "AirCnC Hero") %>
+    </div>
+  </div>
+</div>
