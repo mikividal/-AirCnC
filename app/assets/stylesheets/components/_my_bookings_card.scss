@@ -1,0 +1,87 @@
+h1 {
+  margin: 24px auto;
+  color: black;
+  font-weight: bold;
+  max-width: 900px;
+}
+
+.booking-card {
+  position: relative;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  max-width: 900px;
+  margin: 24px auto;
+  padding-right: 2.5rem;
+  border-radius: 4px;
+}
+
+.card-booking {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.card-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.card-booking img {
+  max-width: 300px;
+  height: auto;
+}
+
+.card-booking h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-booking p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0.7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-booking .card-booking-infos {
+  padding: 16px;
+}
+
+.card-booking-infos {
+  margin: 4px 0px;
+}
+
+.card-booking-infos h5 {
+  color: black;
+  font-weight: 700;
+}
+
+.card-booking-infos h6 {
+  font-weight: 700;
+  color: black;
+}
+
+.card-booking-infos p {
+  color: black;
+  font-size: 14px;
+}
+
+.bin {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: black;
+  cursor: pointer;
+}
+
+.bin i {
+  font-size: 18px;
+}

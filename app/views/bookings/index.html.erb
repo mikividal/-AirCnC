@@ -1,1 +1,26 @@
-<h1> My Bookings </h1>
+<h1>My Bookings</h1>
+
+<% if @bookings.any? %>
+  <div>
+    <% @bookings.each do |booking| %>
+      <div class="booking-card">
+        <div class="card-booking">
+          <div class="card-image-wrapper">
+            <%= image_tag "https://ceblog.s3.amazonaws.com/wp-content/uploads/2012/05/20172622/ce-travel.jpg" %>
+          </div>
+
+          <div class="card-booking-infos">
+            <h5><%= booking.country.name %></h5>
+            <p><%= booking.start_date %> - <%= booking.end_date %></p>
+          </div>
+
+          <%= link_to booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "bin" do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>You have no bookings yet.</p>
+<% end %>
