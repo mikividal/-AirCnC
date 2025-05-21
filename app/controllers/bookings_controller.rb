@@ -42,4 +42,5 @@ before_action :set_booking, only: [:show, :destroy]
   def set_booking
     @booking = Booking.find(params[:id])
   end
+
 end

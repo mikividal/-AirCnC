@@ -4,13 +4,12 @@
     <h3> <%= @booking.country.tag_line %> </h3>
   </div>
 
-
   <div class="row">
     <div class="col-md-6">
       <h2>Booking Details</h2>
-      <p><strong>Check-in:</strong> <%= @booking.date %></p>
-      <p><strong>Check-out:</strong> <%= @booking.date %></p>
-      <p><strong>Total Price:</strong> $<%= @booking.country.price %></p>
+      <p><strong>Check-in:</strong> <%= @booking.start_date %></p>
+      <p><strong>Check-out:</strong> <%= @booking.end_date %></p>
+      <p><strong>Total Price:</strong> $<%= @booking.total_price%></p>
     </div>
 
     <div class="col-md-6">
