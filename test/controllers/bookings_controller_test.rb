@@ -5,3 +5,5 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
   #   assert true
   # end
 end
+
+
