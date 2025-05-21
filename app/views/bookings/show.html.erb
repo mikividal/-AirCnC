@@ -1,0 +1,30 @@
+<div class="container mt-4 ">
+  <div class="text-center mb-4">
+    <h1>Booking Confirmation for <%= @booking.country.name %> </h1>
+    <h3> <%= @booking.country.tag_line %> </h3>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Booking Details</h2>
+      <p><strong>Check-in:</strong> <%= @booking.start_date %></p>
+      <p><strong>Check-out:</strong> <%= @booking.end_date %></p>
+      <p><strong>Total Price:</strong> $<%= @booking.total_price%></p>
+    </div>
+
+    <div class="col-md-6">
+      <h2>Country Details</h2>
+      <p><strong>Name:</strong> <%= @booking.country.name %></p>
+      <p><strong>Description:</strong> <%= @booking.country.description %></p>
+      <p><strong>Main Language:</strong> <%= @booking.country.main_language %></p>
+    </div>
+
+</div>
+<img src="https://uniqsurface.com/wp-content/uploads/2022/05/uniq-surface-paragliding-map-awesome-maps_800x600.jpg" class="img-fluid mt-4 mb-4" alt="Country Image" style="width: 100%;">
+  <div class="text-center">
+    <%= link_to "Back to Countries", countries_path, class: "btn btn-secondary" %>
+  </div>
+  <div class="text-center mt-4">
+    <h2>Thank you for your booking!</h2>
+    <p>We look forward to welcoming you to <%= @booking.country.name %>.</p>
+</div>
