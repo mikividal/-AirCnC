@@ -36,7 +36,7 @@ before_action :set_booking, only: [:show, :destroy]
   private
 
   def booking_params
-    params.require(:booking).permit(:date, :country_id, :user_id)
+    params.require(:booking).permit(:start_date, :end_date, :country_id, :user_id)
   end
 
   def set_booking

@@ -7,13 +7,19 @@
     <p> Description: <%= @country.description %></p>
     <p> Main language: <%= @country.main_language %> </p>
 
-    <div class="mt-4">
+   <div class="mt-4">
     <%= simple_form_for [@country, @booking] do |f| %>
-      <%= f.input :date,
-                as: :string,
-                input_html: { data: { controller: "datepicker" } } %>
-      <%= f.button :submit, "Book now", class: "btn btn-primary" %>
-    <% end %>
+    <%= f.input :start_date, as: :hidden, input_html: { id: "start-date" } %>
+    <%= f.input :end_date, as: :hidden, input_html: { id: "end-date" } %>
+
+    <div data-controller="daterange">
+      <input type="text"
+             data-daterange-target="input"
+             class="form-control"
+             placeholder="Select a date range" />
     </div>
+    <%= f.button :submit, "Book now", class: "btn btn-primary" %>
+  <% end %>
+  </div>
   </div>
 </div>
