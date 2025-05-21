@@ -10,7 +10,7 @@
           </div>
 
           <div class="card-booking-infos">
-            <h5><%= booking.country.name %></h5>
+            <h5><%= link_to booking.country.name, booking_path(booking) %></h5>
             <p><%= booking.start_date %> - <%= booking.end_date %></p>
           </div>
 
