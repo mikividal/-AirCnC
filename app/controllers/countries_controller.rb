@@ -44,7 +44,7 @@ class CountriesController < ApplicationController
   private
 
   def country_params
-    params.require(:country).permit(:name, :price, :tag_line, :description, :main_language, :user_id)
+    params.require(:country).permit(:name, :capital_city, :price, :tag_line, :description, :main_language, :user_id)
   end
 
   def set_country
