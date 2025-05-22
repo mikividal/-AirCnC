@@ -1,4 +1,9 @@
-<div class="container mt-4">
-  <h1>Edit <%= @country.name %></h1>
-  <%= render "form", country: @country %>
+<div class="container mt-4" style="width: 700px;">
+  <div class="text-center mb-5">
+  <h1>Edit <%= @country.name %> </h1>
+  </div>
+  <div class="formbox">
+    <%= render "form", country: @country%>
+  </div>
+
 </div>
