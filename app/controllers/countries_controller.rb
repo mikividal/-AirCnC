@@ -1,6 +1,7 @@
 class CountriesController < ApplicationController
   before_action :set_country, only: [:show, :destroy, :update, :edit]
 
+
   def index
     @countries = Country.all
   end
@@ -44,7 +45,7 @@ class CountriesController < ApplicationController
   private
 
   def country_params
-    params.require(:country).permit(:name, :price, :tag_line, :description, :main_language, :user_id)
+    params.require(:country).permit(:name, :price, :tag_line, :description, :main_language, :user_id, :capital_city)
   end
 
   def set_country

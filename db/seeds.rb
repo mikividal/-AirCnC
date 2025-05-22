@@ -8,6 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 puts "Clearing database..."
+Booking.destroy_all
 Country.destroy_all
 User.destroy_all
 
@@ -20,8 +21,8 @@ user3 = User.create!(user_name: "eco", email: "eco@lewagon.com", password: "1234
 puts "#{User.count} created"
 
 puts "Creating countries..."
-Country.create!(name: "Hungary", price: "1000000", tag_line: "Land of palinka and thermal baths", description:"Hungary is a landlocked gem in Central Europe, famed for its sweeping Danube vistas, thermal baths and hearty paprika-spiced cuisine.", main_language: "Hungarian", user: user1)
-Country.create!(name: "Argentina", price: "10000", tag_line: "The country of barbeque and football", description:"Argentina stretches from the windswept Pampas to the soaring Andes, offering fierce tango rhythms, world-class beef and boundless natural wonders.", main_language: "Spanish",  user: user2)
-Country.create!(name: "Maldives", price: "5000000", tag_line: "Paradise island", description:"The Maldives is an archipelago of crystalline turquoise atolls, where overwater villas, vibrant coral reefs and serene white-sand beaches define island paradise", main_language: "Dhivehi", user: user3)
+Country.create!(name: "Hungary", price: "1000000", tag_line: "Land of palinka and thermal baths", description:"Hungary is a landlocked gem in Central Europe, famed for its sweeping Danube vistas, thermal baths and hearty paprika-spiced cuisine.", main_language: "Hungarian", user: user1, capital_city:"Budapest")
+Country.create!(name: "Argentina", price: "10000", tag_line: "The country of barbeque and football", description:"Argentina stretches from the windswept Pampas to the soaring Andes, offering fierce tango rhythms, world-class beef and boundless natural wonders.", main_language: "Spanish",  user: user2, capital_city:"Buenos Aires")
+Country.create!(name: "Maldives", price: "5000000", tag_line: "Paradise island", description:"The Maldives is an archipelago of crystalline turquoise atolls, where overwater villas, vibrant coral reefs and serene white-sand beaches define island paradise", main_language: "Dhivehi", user: user3, capital_city:"Malé")
 
 puts "#{Country.count} created"
