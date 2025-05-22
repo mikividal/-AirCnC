@@ -12,14 +12,16 @@ class CountriesController < ApplicationController
   end
 
   def create
-    @country = Country.new(country_params)
-    @country.user = current_user
-    if @country.save
-      redirect_to countries_path
-    else
-      render :new, status: :unprocessable_entity
+  @country = Country.new(country_params.except(:photos))
+  @country.user = current_user
+  if @country.save
+    if params[:country][:photos].present?
+      @country.photos.attach(params[:country][:photos])
     end
-
+    redirect_to countries_path
+  else
+    render :new, status: :unprocessable_entity
+  end
   end
 
   def show
