@@ -5,6 +5,7 @@ import { application } from "controllers/application"
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 eagerLoadControllersFrom("controllers", application)
 
+import MapController from "./map_controller"
+application.register("map", MapController)
 
-// import * as ActiveStorage from "@rails/activestorage"
-// ActiveStorage.start()
+

@@ -8,4 +8,6 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
 pin "flatpickr" # @4.6.13
-# pin "@rails/activestorage", to: "activestorage.esm.js"
+pin "mapbox-gl", to: "https://cdn.skypack.dev/mapbox-gl"
+pin "process" # @2.1.0
+

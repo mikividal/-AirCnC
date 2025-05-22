@@ -4,6 +4,13 @@ class CountriesController < ApplicationController
 
   def index
     @countries = Country.all
+    @markers = @countries.map do |country|
+    {
+      lat: country.latitude,
+      lng: country.longitude,
+      info_window_html: render_to_string(partial: "info_window", locals: { country: country })
+    }
+    end
   end
 
   def new
