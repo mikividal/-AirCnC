@@ -16,8 +16,10 @@ class CountriesController < ApplicationController
     if @country.save
       redirect_to countries_path
     else
+      puts @country.errors.full_messages
       render :new, status: :unprocessable_entity
     end
+
   end
 
   def show
@@ -44,7 +46,7 @@ class CountriesController < ApplicationController
   private
 
   def country_params
-    params.require(:country).permit(:name, :capital_city, :price, :tag_line, :description, :main_language, :user_id)
+    params.require(:country).permit(:name, :capital_city, :price, :tag_line, :description, :main_language, photos: [])
   end
 
   def set_country

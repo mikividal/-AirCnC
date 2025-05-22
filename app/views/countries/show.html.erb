@@ -1,6 +1,7 @@
 <div class="container mt-4">
+    <%= render "shared/carousel" %>
   <div class="country-info, fluid mx-auto d-block w-50">
-    <img src="https://uniqsurface.com/wp-content/uploads/2022/05/uniq-surface-paragliding-map-awesome-maps_800x600.jpg", class="mb-4">
+    
     <h1> <%= @country.name %></h1>
     <h3> <%= @country.tag_line %> </h3>
     <p> Price: <%= @country.price %> / night</p>

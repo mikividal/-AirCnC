@@ -1,9 +1,30 @@
-<%= simple_form_for(country) do |f| %>
+<%= simple_form_for(@country) do |f| %>
   <%= f.input :name %>
   <%= f.input :price %>
+  <%= f.input :capital_city %>
   <%= f.input :tag_line %>
   <%= f.input :description %>
   <%= f.input :main_language %>
+
+  <div data-controller="photo-preview">
+    <%= f.label :photos %>
+    <%= f.file_field :photos,
+          multiple: true,
+          direct_upload: true,
+          accept: 'image/*',
+          data: { "photo-preview-target": "input", action: "change->photo-preview#preview" },
+          class: 'form-control' %>
+
+    <div data-photo-preview-target="preview" style="margin-top: 10px;"></div>
+
+    <button type="button"
+      data-photo-preview-target="removeButton"
+      data-action="click->photo-preview#remove"
+      style="display: none; margin-top: 10px;">
+      Remove photo
+    </button>
+  </div>
+
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
 

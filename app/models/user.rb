@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :countries
   has_many :bookings
+  has_one_attached :avatar
 end
