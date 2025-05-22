@@ -1,12 +1,25 @@
-<%= simple_form_for(@country) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :price %>
-  <%= f.input :capital_city %>
-  <%= f.input :tag_line %>
-  <%= f.input :description %>
-  <%= f.input :main_language %>
 
-  <div data-controller="photo-preview">
+<%= simple_form_for(country) do |f| %>
+  <div class="row g-5">
+    <div class="col-md-6">
+      <%= f.input :name, input_html: { class: "form-control", placeholder: "Country name" }%>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :capital_city, input_html: { class: "form-control", placeholder: "Capital city" }%>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :price, input_html: { class: "form-control", placeholder: "Price per night" } %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :main_language, input_html: { class: "form-control", placeholder: "Main language spoken" }%>
+    </div>
+  </div>
+  <div class="bottominfo">
+    <%= f.input :tag_line, input_html: { class: "form-control", placeholder: "Drive more rentals with a catching tag line" }%>
+    <%= f.input :description, input_html: { class: "form-control", placeholder: "What makes your country great?" }%>
+  </div>
+
+ <div data-controller="photo-preview">
     <%= f.label :photos %>
     <%= f.file_field :photos,
           multiple: true,
@@ -25,7 +38,8 @@
     </button>
   </div>
 
-  <%= f.submit class: "btn btn-primary" %>
+ <div class="d-flex justify-content-evenly align-items-center">
+  <%= link_to "Cancel", countries_path, class:"btn btn-outline-primary" %>
+  <%= f.submit "List country", class: "btn btn-outline-primary"%>
+ </div>
 <% end %>
-
-<%= link_to "Cancel", countries_path, class: "btn btn-secondary mt-4" %>

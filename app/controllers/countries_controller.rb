@@ -1,6 +1,7 @@
 class CountriesController < ApplicationController
   before_action :set_country, only: [:show, :destroy, :update, :edit]
 
+
   def index
     @countries = Country.all
   end
@@ -16,7 +17,6 @@ class CountriesController < ApplicationController
     if @country.save
       redirect_to countries_path
     else
-      puts @country.errors.full_messages
       render :new, status: :unprocessable_entity
     end
 
