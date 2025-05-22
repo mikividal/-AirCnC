@@ -1,0 +1,19 @@
+/* app/assets/stylesheets/active_storage_direct_uploads.css */
+.direct-upload-container {
+  position: relative;
+  margin: 0 10px 10px 0;
+}
+
+.direct-upload__progress {
+  height: 4px;
+  background-color: #0076ff;
+  transition: width 300ms ease-out;
+}
+
+.direct-upload--error .direct-upload__progress {
+  background-color: red;
+}
+
+.direct-upload--complete .direct-upload__progress {
+  background-color: green;
+}
