@@ -19,7 +19,7 @@
     <%= f.input :description, input_html: { class: "form-control", placeholder: "What makes your country great?" }%>
   </div>
 
- <div data-controller="photo-preview">
+ <div data-controller="photo-preview" class="photoupload">
     <%= f.label :photos %>
     <%= f.file_field :photos,
           multiple: true,
@@ -38,8 +38,13 @@
     </button>
   </div>
 
- <div class="d-flex justify-content-evenly align-items-center">
-  <%= link_to "Cancel", countries_path, class:"btn btn-outline-primary" %>
-  <%= f.submit "List country", class: "btn btn-outline-primary"%>
- </div>
+  <div class="row align-items-center text-center">
+    <div class="col text-start">
+      <%= link_to "Cancel", countries_path %>
+    </div>
+    <div class="col">
+      <%= f.submit "List country", class: "btn btn-outline-primary" %>
+    </div>
+    <div class="col"><!-- empty --></div>
+  </div>
 <% end %>
