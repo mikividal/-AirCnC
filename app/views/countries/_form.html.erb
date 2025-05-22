@@ -1,6 +1,4 @@
 
-
-
 <%= simple_form_for(country) do |f| %>
   <div class="row g-5">
     <div class="col-md-6">
@@ -19,6 +17,25 @@
   <div class="bottominfo">
     <%= f.input :tag_line, input_html: { class: "form-control", placeholder: "Drive more rentals with a catching tag line" }%>
     <%= f.input :description, input_html: { class: "form-control", placeholder: "What makes your country great?" }%>
+  </div>
+
+ <div data-controller="photo-preview">
+    <%= f.label :photos %>
+    <%= f.file_field :photos,
+          multiple: true,
+          direct_upload: true,
+          accept: 'image/*',
+          data: { "photo-preview-target": "input", action: "change->photo-preview#preview" },
+          class: 'form-control' %>
+
+    <div data-photo-preview-target="preview" style="margin-top: 10px;"></div>
+
+    <button type="button"
+      data-photo-preview-target="removeButton"
+      data-action="click->photo-preview#remove"
+      style="display: none; margin-top: 10px;">
+      Remove photo
+    </button>
   </div>
 
  <div class="d-flex justify-content-evenly align-items-center">

@@ -19,6 +19,7 @@ class CountriesController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+
   end
 
   def show
@@ -45,7 +46,7 @@ class CountriesController < ApplicationController
   private
 
   def country_params
-    params.require(:country).permit(:name, :price, :tag_line, :description, :main_language, :user_id, :capital_city)
+    params.require(:country).permit(:name, :capital_city, :price, :tag_line, :description, :main_language, photos: [])
   end
 
   def set_country
