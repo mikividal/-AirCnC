@@ -20,23 +20,23 @@
   </div>
 
  <div data-controller="photo-preview">
-    <%= f.label :photos %>
-    <%= f.file_field :photos,
-          multiple: true,
-          direct_upload: true,
-          accept: 'image/*',
-          data: { "photo-preview-target": "input", action: "change->photo-preview#preview" },
-          class: 'form-control' %>
+  <%= f.label :photos %>
+  <%= f.file_field :photos,
+        multiple: true,
+        direct_upload: true,
+        accept: 'image/*',
+        data: { "photo-preview-target": "input", action: "change->photo-preview#preview" },
+        class: 'form-control' %>
 
-    <div data-photo-preview-target="preview" style="margin-top: 10px;"></div>
+  <div data-photo-preview-target="preview" style="margin-top: 10px;"></div>
 
-    <button type="button"
-      data-photo-preview-target="removeButton"
-      data-action="click->photo-preview#remove"
-      style="display: none; margin-top: 10px;">
-      Remove photo
-    </button>
-  </div>
+  <button type="button"
+    data-photo-preview-target="removeButton"
+    data-action="click->photo-preview#remove"
+    style="display: none; margin-top: 10px;">
+    Remove photo
+  </button>
+</div>
 
  <div class="d-flex justify-content-evenly align-items-center">
   <%= link_to "Cancel", countries_path, class:"btn btn-outline-primary" %>

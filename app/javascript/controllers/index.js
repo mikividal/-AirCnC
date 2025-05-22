@@ -4,3 +4,7 @@ import { application } from "controllers/application"
 // application.register("daterange", DaterangeController)
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 eagerLoadControllersFrom("controllers", application)
+
+
+// import * as ActiveStorage from "@rails/activestorage"
+// ActiveStorage.start()
