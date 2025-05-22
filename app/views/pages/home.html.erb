@@ -8,10 +8,10 @@
       <% if user_signed_in? %>
         <p class="text-success">Welcome back, <%= current_user.email %>!</p>
       <% else %>
-        <div class="card shadow-sm p-4 mt-3">
+        <%# <div class="card shadow-sm p-4 mt-3">
           <h5 class="mb-3">Sign up now to explore!</h5>
-          <%= render "devise/registrations/new" %>
-        </div>
+
+        </div> %>
       <% end %>
 
       <%= link_to "Browse all countries", countries_path, class: "btn btn-outline-primary mt-4" %>
