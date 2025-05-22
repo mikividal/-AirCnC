@@ -3,6 +3,13 @@ class CountriesController < ApplicationController
 
   def index
     @countries = Country.all
+    @markers = @countries.map do |country|
+    {
+      lat: country.latitude,
+      lng: country.longitude,
+      info_window_html: render_to_string(partial: "info_window", locals: { country: country })
+    }
+    end
   end
 
   def new
@@ -44,7 +51,7 @@ class CountriesController < ApplicationController
   private
 
   def country_params
-    params.require(:country).permit(:name, :price, :tag_line, :description, :main_language, :user_id)
+    params.require(:country).permit(:name, :capital_city, :price, :tag_line, :description, :main_language, :user_id)
   end
 
   def set_country
