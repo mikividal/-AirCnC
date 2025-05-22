@@ -1,6 +1,7 @@
 class CountriesController < ApplicationController
   before_action :set_country, only: [:show, :destroy, :update, :edit]
 
+
   def index
     @countries = Country.all
     @markers = @countries.map do |country|
@@ -18,13 +19,16 @@ class CountriesController < ApplicationController
   end
 
   def create
-    @country = Country.new(country_params)
-    @country.user = current_user
-    if @country.save
-      redirect_to countries_path
-    else
-      render :new, status: :unprocessable_entity
+  @country = Country.new(country_params.except(:photos))
+  @country.user = current_user
+  if @country.save
+    if params[:country][:photos].present?
+      @country.photos.attach(params[:country][:photos])
     end
+    redirect_to countries_path
+  else
+    render :new, status: :unprocessable_entity
+  end
   end
 
   def show
@@ -51,7 +55,7 @@ class CountriesController < ApplicationController
   private
 
   def country_params
-    params.require(:country).permit(:name, :capital_city, :price, :tag_line, :description, :main_language, :user_id)
+    params.require(:country).permit(:name, :capital_city, :price, :tag_line, :description, :main_language, photos: [])
   end
 
   def set_country
