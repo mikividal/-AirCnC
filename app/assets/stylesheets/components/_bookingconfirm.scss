@@ -1,27 +1,26 @@
 .confirmation {
-  background-color: lightgray;
-  border: 0.5px solid rgb(155, 153, 153);
+  background-color: #006895;
   border-radius: 8px;
   padding-bottom: 16px;
   margin-bottom: auto 16px;
-  h1{
-    text-align: center;
-  }
+  color:#dfdcd3;
+  text-align: center;
 }
 
 .booking-details{
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin-top: 25px;
 }
 
 .dateinfo, .priceinfo {
-  background-color: whitesmoke;
+  background-color: #dfdcd3;
   padding: 8px 16px;
   border-radius: 8px;
-  border: 0.5px solid rgb(155, 153, 153);
   font-size: large;
   margin-bottom: auto;
+  color:#006895;
     p{
       margin: auto;
     }
@@ -37,26 +36,15 @@
   text-align:center;
 }
 #countrydetails{
-  text-align: justify;
-  border: 0.5px solid rgb(155, 153, 153);
+  text-align: center;
+  color:#dfdcd3;
   border-radius: 8px;
-  margin-top: 50px;
-  height: fit-content;
-  overflow: auto;
-  word-wrap: break-word;
-  max-width: 100%;
     h2{
       padding-top: 16px;
     }
 }
 
-#thankyou{
-  text-align: center;
-  margin-top: 80px;
-  margin-left: 25px;
-  background-color: lightgray;
-  border: 0.5px solid rgb(155, 153, 153);
+
+#map-show-booking{
   border-radius: 8px;
-  padding: 16px;
-  height: fit-content;
 }
