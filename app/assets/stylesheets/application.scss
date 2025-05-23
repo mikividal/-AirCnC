@@ -16,6 +16,7 @@
 @import "components/photo_preview";
 @import "components/carousel";
 @import "active_storage_direct_uploads";
+@import "pages/show_country";
 
 /* Upload Previews */
 .preview-wrapper {
@@ -49,4 +50,3 @@
 .upload-complete .upload-progress {
   background: #00aa00;
 }
-

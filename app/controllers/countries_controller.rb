@@ -19,7 +19,7 @@ class CountriesController < ApplicationController
   end
 
   def create
-  @country = Country.new(country_params.except(:photos))
+  @country = Country.new(country_params)
   @country.user = current_user
   if @country.save
     if params[:country][:photos].present?

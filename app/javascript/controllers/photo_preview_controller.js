@@ -8,9 +8,13 @@ export default class extends Controller {
     console.log("Photo Preview controller connected")
     this.files = []
     this.signedIds = new Map()
+    this.updateNoImagesText()
   }
 
   preview() {
+    if (this.inputTarget.files.length > 0) {
+      this.hideNoImagesText()
+    }
     Array.from(this.inputTarget.files).forEach(file => {
       const key = `${file.name}-${file.size}`
       if (!this.signedIds.has(key)) {
@@ -18,7 +22,7 @@ export default class extends Controller {
         this.readFileAndPreview(file, key)
       }
     })
-    // Clear input to allow uploading the same file again if needed
+ 
     this.inputTarget.value = ""
   }
 
@@ -78,6 +82,9 @@ export default class extends Controller {
     this.files = this.files.filter(f => `${f.name}-${f.size}` !== key)
     wrapper.remove()
     this.syncHiddenInputs()
+    if (this.files.length === 0) {
+      this.showNoImagesText()
+    }
   }
 
   syncHiddenInputs() {
@@ -90,5 +97,23 @@ export default class extends Controller {
       input.dataset.uploaded = true
       this.element.appendChild(input)
     })
+  }
+
+  hideNoImagesText() {
+    const noImages = this.element.querySelector(".no-images-text")
+    if (noImages) noImages.style.display = "none"
+  }
+
+  showNoImagesText() {
+    const noImages = this.element.querySelector(".no-images-text")
+    if (noImages) noImages.style.display = "block"
+  }
+
+  updateNoImagesText() {
+    if (this.files.length === 0) {
+      this.showNoImagesText()
+    } else {
+      this.hideNoImagesText()
+    }
   }
 }
