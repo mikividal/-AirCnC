@@ -1,9 +1,10 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :destroy]
-  before_action :set_country, only: [:create] 
+  before_action :set_country, only: [:create]
 
   def index
     @bookings = current_user.bookings if user_signed_in?
+    @new_countries = Country.order(created_at: :desc).limit(5) # or whatever you want here
   end
 
   def show

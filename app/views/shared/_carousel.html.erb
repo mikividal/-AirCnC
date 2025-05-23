@@ -10,6 +10,11 @@
                 aria-current="<%= 'true' if index == 0 %>"
                 aria-label="Slide <%= index + 1 %>"></button>
       <% end %>
+      <!-- Extra indicator for the map -->
+      <button type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide-to="<%= @country.photos.count %>"
+              aria-label="Map slide"></button>
     </div>
 
     <div class="carousel-inner">
@@ -20,7 +25,17 @@
           </div>
         </div>
       <% end %>
-    </div>
+
+<div class="carousel-item">
+  <div id="map-show-booking"
+        class="d-block w-100 carousel-image"
+       data-controller="map"
+       data-map-markers-value="<%= [@markers].to_json %>"
+       data-map-api-key-value="<%= ENV["pk.eyJ1IjoibWlnejIyMDUiLCJhIjoiY21hemc4ZzJiMGJzcjJsc2Fxdm83MDdweiJ9.yu0zSvl3tEeW55Rw9wjFjA"] %>"
+       style="height: 100%; width: 100%;">
+  </div>
+</div>
+
 
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -33,3 +48,7 @@
 
   </div>
 </div>
+
+<script>
+document.querySelector('#carouselExampleControls')?.addEventListener('slid.bs.carousel', () => mapboxgl?.maps?.[0]?.resize());
+</script>

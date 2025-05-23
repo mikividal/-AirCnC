@@ -36,6 +36,13 @@ class CountriesController < ApplicationController
   def show
     @booking = Booking.new
     @user = current_user
+
+    @markers =
+      {
+        lat: @country.latitude,
+        lng: @country.longitude,
+        info_window_html: render_to_string(partial: "countries/info_window", locals: { country: @country }, formats: [:html])
+      }
   end
 
   def destroy

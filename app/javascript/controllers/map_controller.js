@@ -14,6 +14,7 @@ export default class extends Controller {
     this.addMarkers()
     this.fitMapToMarkers()
 
+
     // Expose controller instance for external access (e.g., to call resize)
     this.element.__mapController = this
   }
