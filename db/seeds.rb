@@ -12,6 +12,7 @@ Booking.destroy_all
 Country.destroy_all
 User.destroy_all
 
+
 puts "Creating users..."
 
 user1 = User.create!(user_name: "carlover123", first_name: "Murray", email: "carlo@lewagon.com", password: "1234569")
