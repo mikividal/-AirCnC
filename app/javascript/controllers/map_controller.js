@@ -80,4 +80,9 @@ export default class extends Controller {
 
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 5, duration: 0 })
   }
+  resizeMap() {
+    if (this.map) {
+      this.map.resize()
+    }
+  }
 }
