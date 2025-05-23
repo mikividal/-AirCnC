@@ -12,7 +12,7 @@
         <div class="col">
   <div class="card h-100 shadow-sm border-0">
     <% if country.photos.attached? %>
-      <%= image_tag country.photos.first, class: "card-img-top", alt: "#{country.name} image" %>
+      <%= cl_image_tag country.photos.first.key, class: "card-img-top", alt: "#{country.name} image" %>
     <% end %>
 
     <div class="card-body text-center">

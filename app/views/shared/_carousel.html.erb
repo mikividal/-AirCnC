@@ -16,7 +16,7 @@
       <% @country.photos.each_with_index do |photo, index| %>
         <div class="carousel-item <%= 'active' if index == 0 %>">
           <div class="carousel-image-wrapper">
-            <%= image_tag photo, class: "d-block w-100 carousel-image", alt: @country.name %>
+            <%= cl_image_tag photo.key, class: "d-block w-100 carousel-image", alt: @country.name %>
           </div>
         </div>
       <% end %>
