@@ -1,5 +1,3 @@
-// app/javascript/controllers/map_controller.js
-
 import { Controller } from "@hotwired/stimulus"
 import mapboxgl from "mapbox-gl"
 
@@ -15,7 +13,10 @@ export default class extends Controller {
     this.initializeMap()
     this.addMarkers()
     this.fitMapToMarkers()
-    
+
+
+    // Expose controller instance for external access (e.g., to call resize)
+    this.element.__mapController = this
   }
 
   initializeMap() {
@@ -81,4 +82,10 @@ export default class extends Controller {
 
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 5, duration: 0 })
   }
+  resizeMap() {
+    if (this.map) {
+      this.map.resize()
+    }
+  }
 }
+
