@@ -1,28 +1,79 @@
-<div class="container mt-5">
-  <h1 class="mb-4">Countries</h1>
+<div class="container-fluid mt-4">
+  <!-- Header + Toggle Button -->
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+    <h1 class="mb-2">Explore Countries</h1>
+    <button id="toggle-view-btn" class="btn btn-outline-primary">Map View</button>
+  </div>
 
-<!-- Map View -->
-<div id="map"
-     data-controller="map"
-     data-map-markers-value="<%= @markers.to_json %>"
-     data-map-api-key-value="<%= ENV['pk.eyJ1IjoibWlnejIyMDUiLCJhIjoiY21hemc4ZzJiMGJzcjJsc2Fxdm83MDdweiJ9.yu0zSvl3tEeW55Rw9wjFjA'] %>"
-     style="width: 100%; height: 600px;">
-</div>
-
-
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-    <% @countries.each do |country| %>
-      <div class="col">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body text-center">
-            <h5 class="card-title">
-              <%= link_to country.name, country_path(country), class: "text-decoration-none stretched-link" %>
-            </h5>
-            <p class="card-text text-muted"><%= country.tag_line %></p>
-            <p class="fw-bold">£<%= number_to_currency(country.price, unit: "", precision: 2) %></p>
-          </div>
-        </div>
-      </div>
+  <!-- Grid View -->
+  <div id="grid-view" class="p-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      <% @countries.each do |country| %>
+        <div class="col">
+  <div class="card h-100 shadow-sm border-0">
+    <% if country.photos.attached? %>
+      <%= image_tag country.photos.first, class: "card-img-top", alt: "#{country.name} image" %>
     <% end %>
+
+    <div class="card-body text-center">
+      <h5 class="card-title">
+          <%= link_to country.name, country_path(country), class: "text-decoration-none stretched-link text-dark" %>
+        </h5>
+        <p class="card-text text-muted"><%= country.tag_line %></p>
+        <p class="fw-bold">£<%= number_to_currency(country.price, unit: "", precision: 2) %></p>
+      </div>
+    </div>
+  </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Map View -->
+  <div id="map-view" class="row gx-4 d-none">
+    <!-- Map Container -->
+    <div class="col-lg-8 col-md-12 mb-4 mb-lg-0">
+      <div data-controller="map"
+           data-map-markers-value='<%= raw(@markers.to_json) %>'
+           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+           style="width: 100%; height: 600px; border-radius: 1rem; overflow: hidden;">
+      </div>
+    </div>
+
+    <!-- Nearby Countries List -->
+    <div class="col-lg-4 col-md-12">
+      <h5 class="mb-3">Countries Near You</h5>
+      <ul id="map-country-list" class="list-group list-group-flush shadow-sm">
+        <li class="list-group-item">Click a marker to see nearby countries.</li>
+      </ul>
+    </div>
   </div>
 </div>
+
+<!-- Toggle Logic -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById("toggle-view-btn");
+    const gridView = document.getElementById("grid-view");
+    const mapView = document.getElementById("map-view");
+
+    toggleBtn.addEventListener("click", () => {
+      const isMapVisible = !mapView.classList.contains("d-none");
+
+      if (isMapVisible) {
+        mapView.classList.add("d-none");
+        gridView.classList.remove("d-none");
+        toggleBtn.textContent = "Map View";
+      } else {
+        mapView.classList.remove("d-none");
+        gridView.classList.add("d-none");
+        toggleBtn.textContent = "Grid View";
+
+        // Resize map when shown
+        const mapEl = document.getElementById("map");
+        if (mapEl && mapEl._mapboxInstance) {
+          mapEl._mapboxInstance.resize();
+        }
+      }
+    });
+  });
+</script>
