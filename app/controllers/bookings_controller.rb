@@ -7,6 +7,15 @@ class BookingsController < ApplicationController
   end
 
   def show
+    @booking = Booking.find(params[:id])
+    @country = @booking.country
+
+    @markers =
+      {
+        lat: @country.latitude,
+        lng: @country.longitude,
+        info_window_html: render_to_string(partial: "countries/info_window", locals: { country: @country }, formats: [:html])
+      }
   end
 
   def new

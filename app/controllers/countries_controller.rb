@@ -5,11 +5,13 @@ class CountriesController < ApplicationController
   def index
     @countries = Country.all
     @markers = @countries.map do |country|
-    {
+      {
+      id: country.id,
+      name: country.name,
       lat: country.latitude,
       lng: country.longitude,
-      info_window_html: render_to_string(partial: "info_window", locals: { country: country })
-    }
+      popup_html: render_to_string(partial: "popup", locals: { country: country })
+      }
     end
   end
 
@@ -52,6 +54,11 @@ class CountriesController < ApplicationController
   def edit
   end
 
+  def nearby
+  country = Country.find(params[:id])
+  nearby_countries = Country.near([country.latitude, country.longitude], 5000)
+  render json: nearby_countries.limit(10).as_json(only: [:id, :name])
+  end
   private
 
   def country_params
