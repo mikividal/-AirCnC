@@ -6,7 +6,7 @@
       <p class="lead text-muted">Rent countries like never before. A global booking experience with a local touch.</p>
 
       <% if user_signed_in? %>
-        <p class="text-success">Welcome back, <%= current_user.email %>!</p>
+        <p class="text-success">Welcome back, <%= current_user.first_name %>!</p>
       <% else %>
         <%# <div class="card shadow-sm p-4 mt-3">
           <h5 class="mb-3">Sign up now to explore!</h5>
