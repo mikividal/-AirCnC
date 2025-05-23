@@ -1,88 +1,119 @@
 import { Controller } from "@hotwired/stimulus"
+import { DirectUpload } from "@rails/activestorage"
 
 export default class extends Controller {
   static targets = ["input", "preview"]
 
   connect() {
-    this.files = [] // Track selected files here
+    console.log("Photo Preview controller connected")
+    this.files = []
+    this.signedIds = new Map()
+    this.updateNoImagesText()
   }
 
   preview() {
-    // Add new files from input to this.files, avoiding duplicates
-    const newFiles = Array.from(this.inputTarget.files)
-
-    newFiles.forEach(file => {
-      // Only add if not already in files (compare by name + size)
-      if (!this.files.some(f => f.name === file.name && f.size === file.size)) {
+    if (this.inputTarget.files.length > 0) {
+      this.hideNoImagesText()
+    }
+    Array.from(this.inputTarget.files).forEach(file => {
+      const key = `${file.name}-${file.size}`
+      if (!this.signedIds.has(key)) {
         this.files.push(file)
+        this.readFileAndPreview(file, key)
       }
     })
-
-    this.updatePreview()
-    this.resetInput()
+ 
+    this.inputTarget.value = ""
   }
 
-  updatePreview() {
-    this.previewTarget.innerHTML = ''
+  readFileAndPreview(file, key) {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const wrapper = document.createElement("div")
+      wrapper.className = "preview-wrapper"
+      wrapper.dataset.key = key
 
-    this.files.forEach((file, index) => {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        const wrapper = document.createElement('div')
-        wrapper.classList.add('preview-wrapper')
-        wrapper.style.position = 'relative'
-        wrapper.style.display = 'inline-block'
-        wrapper.style.marginRight = '10px'
-        wrapper.style.marginBottom = '10px'
+      const img = document.createElement("img")
+      img.src = e.target.result
+      img.className = "preview-image"
 
-        const img = document.createElement('img')
-        img.src = e.target.result
-        img.style.width = '100px'
-        img.style.height = '100px'
-        img.style.objectFit = 'cover'
-        img.style.borderRadius = '4px'
-        img.style.boxShadow = '0 0 5px rgba(0,0,0,0.3)'
+      const closeBtn = document.createElement("button")
+      closeBtn.type = "button"
+      closeBtn.innerText = "×"
+      closeBtn.className = "remove-image-btn"
+      closeBtn.addEventListener("click", () => this.removeImage(key, wrapper))
 
-        const btn = document.createElement('button')
-        btn.type = 'button'
-        btn.textContent = '×'  // multiply symbol for “X”
-        btn.style.position = 'absolute'
-        btn.style.top = '2px'
-        btn.style.right = '2px'
-        btn.style.background = 'rgba(0,0,0,0.5)'
-        btn.style.color = 'white'
-        btn.style.border = 'none'
-        btn.style.borderRadius = '50%'
-        btn.style.width = '20px'
-        btn.style.height = '20px'
-        btn.style.cursor = 'pointer'
-        btn.title = 'Remove image'
+      const progress = document.createElement("div")
+      progress.className = "upload-progress"
 
-        btn.addEventListener('click', () => {
-          this.files.splice(index, 1)
-          this.updatePreview()
+      wrapper.appendChild(img)
+      wrapper.appendChild(closeBtn)
+      wrapper.appendChild(progress)
+      this.previewTarget.appendChild(wrapper)
+
+      this.uploadFile(file, key, progress)
+    }
+    reader.readAsDataURL(file)
+  }
+
+  uploadFile(file, key, progressBar) {
+    const url = this.inputTarget.dataset.directUploadUrl
+    const upload = new DirectUpload(file, url, {
+      directUploadWillStoreFileWithXHR: (xhr) => {
+        xhr.upload.addEventListener("progress", event => {
+          const progress = (event.loaded / event.total) * 100
+          progressBar.style.width = `${progress}%`
         })
-
-        wrapper.appendChild(img)
-        wrapper.appendChild(btn)
-        this.previewTarget.appendChild(wrapper)
       }
-      reader.readAsDataURL(file)
     })
 
-    // Update the actual input element’s files to match this.files:
-    this.updateInputFiles()
+    upload.create((error, blob) => {
+      if (error) {
+        console.error("Upload error:", error)
+      } else {
+        this.signedIds.set(key, blob.signed_id)
+        this.syncHiddenInputs()
+      }
+    })
   }
 
-  resetInput() {
-    // Clear input so change event triggers even if user selects same files again
-    this.inputTarget.value = ''
+  removeImage(key, wrapper) {
+    this.signedIds.delete(key)
+    this.files = this.files.filter(f => `${f.name}-${f.size}` !== key)
+    wrapper.remove()
+    this.syncHiddenInputs()
+    if (this.files.length === 0) {
+      this.showNoImagesText()
+    }
   }
 
-  updateInputFiles() {
-    // Unfortunately, input.files is read-only, so we create a DataTransfer to set it
-    const dataTransfer = new DataTransfer()
-    this.files.forEach(file => dataTransfer.items.add(file))
-    this.inputTarget.files = dataTransfer.files
+  syncHiddenInputs() {
+    this.element.querySelectorAll("input[type='hidden'][data-uploaded]").forEach(i => i.remove())
+    this.signedIds.forEach(signedId => {
+      const input = document.createElement("input")
+      input.type = "hidden"
+      input.name = `${this.inputTarget.name}[]`
+      input.value = signedId
+      input.dataset.uploaded = true
+      this.element.appendChild(input)
+    })
+  }
+
+  hideNoImagesText() {
+    const noImages = this.element.querySelector(".no-images-text")
+    if (noImages) noImages.style.display = "none"
+  }
+
+  showNoImagesText() {
+    const noImages = this.element.querySelector(".no-images-text")
+    if (noImages) noImages.style.display = "block"
+  }
+
+  updateNoImagesText() {
+    if (this.files.length === 0) {
+      this.showNoImagesText()
+    } else {
+      this.hideNoImagesText()
+    }
   }
 }

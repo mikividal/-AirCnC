@@ -1,5 +1,5 @@
 
-<%= simple_form_for(country) do |f| %>
+<%= simple_form_for(country, html: { multipart: true }) do |f| %>
   <div class="row g-5">
     <div class="col-md-6">
       <%= f.input :name, input_html: { class: "form-control", placeholder: "Country name" }%>
@@ -20,16 +20,22 @@
   </div>
 
 
-  <div data-controller="photo-preview" class="photoupload">
-    <%= f.label :photos %>
-    <%= f.file_field :photos,
-          multiple: true,
-          direct_upload: true,
-          accept: 'image/*',
-          data: { "photo-preview-target": "input", action: "change->photo-preview#preview" },
-          class: 'form-control' %>
+<div data-controller="photo-preview" class="photoupload">
+  <%= f.label :photos %>
+  <%= f.file_field :photos,
+    multiple: true,
+    direct_upload: true,
+    accept: 'image/*',
+    data: {
+      action: 'change->photo-preview#preview',
+      direct_upload_url: rails_direct_uploads_url,
+      photo_preview_target: "input" 
+    },
+    class: 'form-control' %>
+
 
   <div data-photo-preview-target="preview" style="margin-top: 10px;"></div>
+
 
   <button type="button"
     data-photo-preview-target="removeButton"
@@ -38,6 +44,8 @@
     Remove photo
   </button>
 </div>
+
+
 
   <div class="row align-items-center text-center">
     <div class="col text-start">

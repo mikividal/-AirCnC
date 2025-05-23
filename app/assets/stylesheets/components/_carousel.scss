@@ -1,0 +1,18 @@
+.flex-box {
+  max-width: 800px;
+  margin: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.200);
+}
+
+.carousel-image-wrapper {
+  height: 400px;
+  overflow: hidden;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,26 +1,29 @@
-<div class="container mt-4">
-    <%= render "shared/carousel" %>
-  <div class="country-info, fluid mx-auto d-block w-50">
-    
-    <h1> <%= @country.name %></h1>
-    <h3> <%= @country.tag_line %> </h3>
-    <p> Price: <%= @country.price %> / night</p>
-    <p> Description: <%= @country.description %></p>
-    <p> Main language: <%= @country.main_language %> </p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="country-info">
+        <h1><%= @country.name %></h1>
+        <h3><%= @country.tag_line %></h3>
+        <p>Price: <%= @country.price %> / night</p>
+        <p>Description: <%= @country.description %></p>
+        <p>Main language: <%= @country.main_language %></p>
 
-   <div class="mt-4">
-    <%= simple_form_for [@country, @booking] do |f| %>
-    <%= f.input :start_date, as: :hidden, input_html: { id: "start-date" } %>
-    <%= f.input :end_date, as: :hidden, input_html: { id: "end-date" } %>
 
-    <div data-controller="daterange">
-      <input type="text"
-             data-daterange-target="input"
-             class="form-control"
-             placeholder="Select a date range" />
-    <%= f.button :submit, "Book now", class: "btn btn-primary mt-4"%>
+        <div class="mt-4" data-controller="daterange">
+          <%= form_with model: [@country, @booking || @country.bookings.new] do |f| %>
+            <%= f.hidden_field :start_date, id: "start-date" %>
+            <%= f.hidden_field :end_date, id: "end-date" %>
+
+            <div id="inline-calendar" data-daterange-target="calendar"></div>
+
+            <%= f.submit "Book Now", class: "btn btn-primary mt-4" %>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
-  </div>
+
+    <div class="col-md-6 carousel">
+      <%= render "shared/carousel" %>
+    </div>
   </div>
 </div>

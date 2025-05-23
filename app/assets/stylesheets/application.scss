@@ -14,4 +14,39 @@
 @import "components/my_bookings_card";
 @import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
 @import "components/photo_preview";
+@import "components/carousel";
+@import "active_storage_direct_uploads";
+@import "pages/show_country";
 
+/* Upload Previews */
+.preview-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 0 10px 10px 0;
+}
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.upload-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: #0076ff;
+  width: 0%;
+  transition: width 300ms ease-out;
+}
+
+.upload-error .upload-progress {
+  background: #ff0000;
+}
+
+.upload-complete .upload-progress {
+  background: #00aa00;
+}
