@@ -7,6 +7,14 @@ class BookingsController < ApplicationController
 
   def show
     @booking = Booking.find(params[:id])
+    @country = @booking.country
+
+    @markers =
+      {
+        lat: @country.latitude,
+        lng: @country.longitude,
+        info_window_html: render_to_string(partial: "countries/info_window", locals: { country: @country }, formats: [:html])
+      }
   end
 
   def new
@@ -14,7 +22,6 @@ class BookingsController < ApplicationController
     @countries = Country.all
     @user = current_user
   end
-
 
   def create
     @country = Country.find(params[:country_id])
@@ -42,5 +49,4 @@ class BookingsController < ApplicationController
   def set_booking
     @booking = Booking.find(params[:id])
   end
-
 end
