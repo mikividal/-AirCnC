@@ -1,7 +1,8 @@
-<div class="container mt-4 mb-5">
+<div class="container mt-4 mb-5" style="background-color: #006895; padding-top:8px; padding-bottom:8px; border-radius:8px;">
 
   <div class="confirmation">
-    <h1>Booking Confirmation for <%= @booking.country.name %></h1>
+    <h1>Thank you for booking !</h1>
+    <h2>We look forward to welcoming you to <%= @booking.country.name %></h2>
     <div class="booking-details"> <!-- Booking details -->
       <div class="dateinfo">
         <p id="checkin"><strong>Check-in:</strong> <%= @booking.start_date %></p>
@@ -16,34 +17,31 @@
   </div>
 
   <div class="row justify-content-center gx-5 mt-4 mb-4">
-    <div class="col-md-5" id="countrydetails"> <!-- Country details -->
-      <h2>Country Details</h2>
-      <p><strong>Name:</strong> <%= @booking.country.name %></p>
-      <p><strong>Description:</strong> <%= @booking.country.description %></p>
-      <p><strong>Main Language:</strong> <%= @booking.country.main_language %></p>
-    </div>
     <!-- Carrousel images -->
-    <div class="col-md-5">
-      <img src="https://uniqsurface.com/wp-content/uploads/2022/05/uniq-surface-paragliding-map-awesome-maps_800x600.jpg"
-          class="img-fluid"
-          alt="Country Image"
-          style="width: 500px;">
-    </div>
-  </div>
+    <div class="col">
+      <%= render "shared/carousel" %>
+     </div>
 
 
   <!-- Map View -->
-  <div class="d-flex justify-content-center">
-    <div id="map-show-booking"
+  <div class="d-flex justify-content-center mt-4">
+    <div class="col-md-9" id="map-show-booking"
      data-controller="map"
      data-map-markers-value="<%= [@markers].to_json %>"
      data-map-api-key-value="<%= ENV['pk.eyJ1IjoibWlnejIyMDUiLCJhIjoiY21hemc4ZzJiMGJzcjJsc2Fxdm83MDdweiJ9.yu0zSvl3tEeW55Rw9wjFjA'] %>"
      style="width: 65%; height: 400px;">
     </div>
-    <div id="thankyou">
-      <h2>Thank you for your booking!</h2>
-      <p>We look forward to welcoming you to <%= @booking.country.name %>.</p>
-       <%= link_to "Back to Countries", countries_path, class: "btn btn-secondary" %>
+    <div class="col-md-3" id="countrydetails"> <!-- Country details -->
+      <h2>Country Details</h2>
+      <p><strong>Name:</strong> <%= @booking.country.name %></p>
+      <p><strong>Capital City:</strong> <%= @booking.country.capital_city %></p>
+      <p><strong>Description:</strong> <%= @booking.country.description %></p>
+      <p><strong>Main Language:</strong> <%= @booking.country.main_language %></p>
+      <p><strong>Capital City:</strong> <%= @booking.country.capital_city %></p>
     </div>
   </div>
+  <div style="margin-top:25px;">
+    <%= link_to "Back to Countries", countries_path, class: "btn btn-secondary" %>
+  </div>
+
 </div>
