@@ -1,25 +1,17 @@
-<div class="container py-5">
-  <div class="row align-items-center">
-    <!-- Text + Signup -->
-    <div class="col-md-6 mb-4 mb-md-0">
-      <h1 class="display-4 fw-bold">Welcome to AirCnC</h1>
-      <p class="lead text-muted">Rent countries like never before. A global booking experience with a local touch.</p>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<%= asset_path('landing.jpg') %>'); background-size: cover; background-position: center; min-height: 100vh; display: flex; align-items: center;">
+  <div class="container py-5 text-white">
+    <div class="row">
+      <div class="col-md-6">
+        <h1 class="display-4 fw-bold">Welcome to AirCnC</h1>
+        <p class="lead">Rent countries like never before. A global booking experience with a local touch.</p>
 
-      <% if user_signed_in? %>
-        <p class="text-success">Welcome back, <%= current_user.first_name %>!</p>
-      <% else %>
-        <%# <div class="card shadow-sm p-4 mt-3">
-          <h5 class="mb-3">Sign up now to explore!</h5>
+        <% if user_signed_in? %>
+          <p>Welcome back, <%= current_user.first_name %>!</p>
+        <% end %>
 
-        </div> %>
-      <% end %>
-
-      <%= link_to "Browse all countries", countries_path, class: "btn btn-outline-primary mt-4" %>
-    </div>
-
-    <!-- Image -->
-    <div class="col-md-6 text-center">
-      <%= image_tag("landing.jpg", class: "img-fluid rounded shadow", alt: "AirCnC Hero") %>
+        <%= link_to "Browse all countries", countries_path, class: "btn btn-outline-light mt-4" %>
+      </div>
+      <!-- Removed the image column since background image is used -->
     </div>
   </div>
 </div>
