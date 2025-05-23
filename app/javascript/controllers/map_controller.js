@@ -15,6 +15,7 @@ export default class extends Controller {
     this.initializeMap()
     this.addMarkers()
     this.fitMapToMarkers()
+    
   }
 
   initializeMap() {

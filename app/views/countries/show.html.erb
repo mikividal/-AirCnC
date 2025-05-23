@@ -1,8 +1,9 @@
+<div class="main-container">
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-6">
       <div class="country-info">
-        <h1><%= @country.name %></h1>
+        <h1 id="show-header"><%= @country.name %></h1>
         <h3><%= @country.tag_line %></h3>
         <p>Price: <%= @country.price %> / night</p>
         <p>Description: <%= @country.description %></p>
@@ -25,5 +26,9 @@
     <div class="col-md-6 carousel">
       <%= render "shared/carousel" %>
     </div>
-  </div>
+
+    <%# <div class="col-md-6 map">
+      <%= render "shared/show_map" %>
+    </div>
+</div>
 </div>
